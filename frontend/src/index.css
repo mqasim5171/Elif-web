@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Premium fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
-
+/* Global colors */
 :root{
   /* Old-money luxury palette */
   --brand-bg: #0B1220;          /* deep navy */
@@ -42,52 +40,122 @@
     --radius: 0.75rem;
   }
 
-  body { @apply text-[var(--brand-ink)] bg-[var(--brand-bg)] antialiased; }
-  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; letter-spacing: -0.01em; }
-  p, span, a, li, small, label, input, textarea, button { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+  body {
+    @apply text-[var(--brand-ink)] bg-[var(--brand-bg)] antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.01em;
+  }
+
+  p, span, a, li, small, label, input, textarea, button {
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  }
 }
 
 /********************
   Premium Utilities
 *********************/
 @layer components {
-  .lux-container { @apply max-w-6xl mx-auto px-6; }
+  .lux-container {
+    @apply max-w-6xl mx-auto px-6;
+  }
+
   .lux-card {
-    background-color: color-mix(in srgb, var(--brand-card) 85%, transparent);
+    background-color: var(--brand-card);
     @apply backdrop-blur border border-[var(--brand-border)] rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[box-shadow,transform] duration-300 ease-out;
   }
-  .lux-card-hover:hover { @apply -translate-y-0.5 shadow-[0_10px_30px_-10px_rgba(12,22,38,0.8)]; box-shadow: 0 12px 30px -12px rgba(29,78,216,0.25); }
-  .lux-gold-sep { background: linear-gradient(90deg, rgba(198,166,103,0.25), rgba(198,166,103,0.65), rgba(198,166,103,0.25)); height:1px; }
+
+  .lux-card-hover:hover {
+    @apply -translate-y-0.5 shadow-[0_10px_30px_-10px_rgba(12,22,38,0.8)];
+    box-shadow: 0 12px 30px -12px rgba(29,78,216,0.25);
+  }
+
+  .lux-gold-sep {
+    background: linear-gradient(90deg, rgba(198,166,103,0.25), rgba(198,166,103,0.65), rgba(198,166,103,0.25));
+    height: 1px;
+  }
+
   .lux-btn-primary {
     @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-[var(--brand-ink)] bg-[var(--brand-royal)] relative;
     box-shadow: inset 0 0 0 1px rgba(198,166,103,0.35);
   }
-  .lux-btn-primary:hover { filter: brightness(1.05); }
+
+  .lux-btn-primary:hover {
+    filter: brightness(1.05);
+  }
+
   .lux-btn-outline {
     @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-[var(--brand-ink)] border;
     border-color: rgba(198,166,103,0.6);
   }
-  .lux-btn-outline:hover { box-shadow: 0 0 0 3px rgba(198,166,103,0.15) inset; }
-  .lux-input { @apply bg-transparent border rounded-xl px-3 py-2.5 text-[var(--brand-ink)] placeholder:text-[var(--brand-soft)] focus:outline-none; border-color: rgba(198,166,103,0.35); }
-  .lux-input:focus { box-shadow: 0 0 0 3px rgba(29,78,216,0.2); border-color: rgba(198,166,103,0.6); }
+
+  .lux-btn-outline:hover {
+    box-shadow: 0 0 0 3px rgba(198,166,103,0.15) inset;
+  }
+
+  .lux-input {
+    @apply bg-transparent border rounded-xl px-3 py-2.5 text-[var(--brand-ink)] placeholder:text-[var(--brand-soft)] focus:outline-none;
+    border-color: rgba(198,166,103,0.35);
+  }
+
+  .lux-input:focus {
+    box-shadow: 0 0 0 3px rgba(29,78,216,0.2);
+    border-color: rgba(198,166,103,0.6);
+  }
 }
 
 /********************
   Animations
 *********************/
-@keyframes fadeUp { from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform: translateY(0);} }
-.fade-up { animation: fadeUp 800ms ease-out both; }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-@keyframes slowGlow { 0%{ box-shadow: 0 0 0 rgba(198,166,103,0);} 100%{ box-shadow: 0 10px 40px -10px rgba(29,78,216,0.25);} }
-.glow-on-hover:hover { animation: slowGlow 600ms ease-out forwards; }
+.fade-up {
+  animation: fadeUp 800ms ease-out both;
+}
+
+@keyframes slowGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(198,166,103,0);
+  }
+  100% {
+    box-shadow: 0 10px 40px -10px rgba(29,78,216,0.25);
+  }
+}
+
+.glow-on-hover:hover {
+  animation: slowGlow 600ms ease-out forwards;
+}
 
 /* Hero visual */
 .hero-bg {
-  background: radial-gradient(1200px 600px at 20% 10%, rgba(29,78,216,0.25), transparent 60%),
-              radial-gradient(1000px 500px at 85% 30%, rgba(198,166,103,0.15), transparent 60%),
-              linear-gradient(180deg, rgba(11,18,32,1), rgba(15,26,47,1));
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(29,78,216,0.25), transparent 60%),
+    radial-gradient(1000px 500px at 85% 30%, rgba(198,166,103,0.15), transparent 60%),
+    linear-gradient(180deg, rgba(11,18,32,1), rgba(15,26,47,1));
 }
-.vignette:after { content:""; position:absolute; inset:0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%); pointer-events:none; }
+
+.vignette:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none;
+}
 
 /* Buttons specific transitions without affecting transforms */
-button, a { transition-property: background-color, color, box-shadow, border-color; transition-duration: 200ms; }
+button,
+a {
+  transition-property: background-color, color, box-shadow, border-color;
+  transition-duration: 200ms;
+}
