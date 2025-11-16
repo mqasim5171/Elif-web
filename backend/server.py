@@ -470,6 +470,35 @@ async def seed_admin_and_indexes():
     except Exception as e:
         logger.warning(f"Index creation issue: {e}")
 
+    # Seed default settings
+    if not await db.settings.find_one({"id": "site-settings"}):
+        await db.settings.insert_one(Settings().model_dump())
+
+    # Seed sample services if empty
+    if await db.services.count_documents({}) == 0:
+        sample_services = [
+            Service(name='Web Development', short='Modern, performant websites and apps', order=1).model_dump(),
+            Service(name='UI/UX Design', short='Elegant interfaces with clear user journeys', order=2).model_dump(),
+            Service(name='AI Integration & Chatbots', short='Automations and assistants that work', order=3).model_dump(),
+            Service(name='Branding & Identity', short='Logos, guidelines, and consistent visuals', order=4).model_dump(),
+            Service(name='Video & Motion', short='Snappy edits and motion graphics', order=5).model_dump(),
+        ]
+        for s in sample_services:
+            s['created_at'] = s['created_at'].isoformat()
+        await db.services.insert_many(sample_services)
+
+    # Seed sample projects if empty
+    if await db.projects.count_documents({}) == 0:
+        sample_projects = [
+            Project(title='Athleland – Fitness Club Platform', slug='athleland-fitness', short='Memberships, booking, and workouts in one place.', tags=['Web App'], tech=['React','FastAPI','MongoDB'], cover_url='https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop', live_url='#').model_dump(),
+            Project(title='Old Money Watch Store', slug='old-money-watch', short='Luxury ecommerce with editorial feel.', tags=['E-commerce','Branding'], tech=['Next.js','Stripe'], cover_url='https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1200&auto=format&fit=crop', live_url='#').model_dump(),
+            Project(title='AI Support Chatbot for SaaS', slug='ai-support-bot', short='Reduce tickets with a helpful assistant.', tags=['AI','Automation'], tech=['OpenAI','FastAPI'], cover_url='https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&auto=format&fit=crop', live_url='#').model_dump(),
+        ]
+        for p in sample_projects:
+            p['created_at'] = p['created_at'].isoformat()
+        await db.projects.insert_many(sample_projects)
+
+
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
