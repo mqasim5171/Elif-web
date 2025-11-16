@@ -53,7 +53,8 @@
 @layer components {
   .lux-container { @apply max-w-6xl mx-auto px-6; }
   .lux-card {
-    @apply bg-[var(--brand-card)]/80 backdrop-blur border border-[var(--brand-border)] rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[transform,box-shadow] duration-300 ease-out;
+    background-color: color-mix(in srgb, var(--brand-card) 85%, transparent);
+    @apply backdrop-blur border border-[var(--brand-border)] rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[box-shadow,transform] duration-300 ease-out;
   }
   .lux-card-hover:hover { @apply -translate-y-0.5 shadow-[0_10px_30px_-10px_rgba(12,22,38,0.8)]; box-shadow: 0 12px 30px -12px rgba(29,78,216,0.25); }
   .lux-gold-sep { background: linear-gradient(90deg, rgba(198,166,103,0.25), rgba(198,166,103,0.65), rgba(198,166,103,0.25)); height:1px; }
