@@ -1,53 +1,68 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import { useEffect } from 'react';
+import '@/App.css';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import NavBar from '@/components/NavBar';
+import Footer from '@/components/Footer';
+import Home from '@/pages/Home';
+import Services from '@/pages/Services';
+import Projects from '@/pages/Projects';
+import About from '@/pages/About';
+import Contact from '@/pages/Contact';
+import AdminLogin from '@/pages/admin/Login';
+import AdminLayout from '@/pages/admin/Layout';
+import Dashboard from '@/pages/admin/Dashboard';
+import AdminProjects from '@/pages/admin/Projects';
+import AdminServices from '@/pages/admin/Services';
+import AdminSkills from '@/pages/admin/Skills';
+import AdminPosts from '@/pages/admin/Posts';
+import AdminInquiries from '@/pages/admin/Inquiries';
+import AdminSettings from '@/pages/admin/Settings';
+import { Toaster } from '@/components/ui/sonner';
+import { auth } from '@/lib/auth';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
+function PublicLayout(){
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <div className="min-h-screen bg-[var(--brand-bg)] text-slate-900">
+      <NavBar />
+      <Outlet />
+      <Footer />
+      <Toaster richColors />
     </div>
   );
-};
+}
 
-function App() {
+function RequireAuth(){
+  const token = auth.token();
+  if(!token) return <Navigate to="/admin/login" replace />;
+  return <Outlet />;
+}
+
+function App(){
+  useEffect(()=>{ /* init */ },[]);
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PublicLayout />}> 
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Route>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route element={<RequireAuth />}> 
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/projects" element={<AdminProjects />} />
+            <Route path="/admin/services" element={<AdminServices />} />
+            <Route path="/admin/skills" element={<AdminSkills />} />
+            <Route path="/admin/posts" element={<AdminPosts />} />
+            <Route path="/admin/inquiries" element={<AdminInquiries />} />
+            <Route path="/admin/settings" element={<AdminSettings />} />
           </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
