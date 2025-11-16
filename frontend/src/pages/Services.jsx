@@ -6,9 +6,9 @@ export default function Services(){
   const [services, setServices] = useState([]);
   useEffect(()=>{ PublicAPI.services().then(setServices).catch(console.error); },[]);
   return (
-    <main className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold tracking-tight">Services</h1>
-      <p className="text-slate-600 mt-2">What we can do for you.</p>
+    <main className="lux-container py-16">
+      <h1 className="text-5xl font-bold tracking-tight" style={{fontFamily:'Playfair Display, serif'}}>Services</h1>
+      <p className="text-[var(--brand-soft)] mt-3">What we can do for you.</p>
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map(s=> <ServiceCard key={s.id} service={s} />)}
       </div>

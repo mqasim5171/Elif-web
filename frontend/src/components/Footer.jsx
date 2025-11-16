@@ -1,15 +1,17 @@
 export default function Footer(){
   return (
-    <footer className="mt-16 border-t bg-white/70 backdrop-blur" role="contentinfo">
-      <div className="max-w-6xl mx-auto px-4 py-10 text-sm text-slate-600 flex flex-col sm:flex-row gap-4 justify-between">
+    <footer className="mt-20 border-t border-[var(--brand-border)] bg-[var(--brand-bg)]" role="contentinfo">
+      <div className="lux-gold-sep" />
+      <div className="lux-container py-12 text-sm text-[var(--brand-soft)] flex flex-col sm:flex-row gap-4 justify-between">
         <div className="space-y-1">
-          <div className="font-semibold" data-testid="footer-brand">Elif</div>
+          <div className="font-semibold text-[var(--brand-ink)]" style={{fontFamily:'Playfair Display, serif'}} data-testid="footer-brand">Elif</div>
+          <div className="italic">Crafting digital experiences with precision and elegance.</div>
           <div>© {new Date().getFullYear()} All rights reserved.</div>
         </div>
         <div className="flex gap-6" aria-label="Social links">
-          <a href="#" className="hover:text-slate-900" data-testid="footer-link-linkedin">LinkedIn</a>
-          <a href="#" className="hover:text-slate-900" data-testid="footer-link-instagram">Instagram</a>
-          <a href="#" className="hover:text-slate-900" data-testid="footer-link-github">GitHub</a>
+          <a href="#" className="hover:text-[var(--brand-ink)]" data-testid="footer-link-linkedin">LinkedIn</a>
+          <a href="#" className="hover:text-[var(--brand-ink)]" data-testid="footer-link-instagram">Instagram</a>
+          <a href="#" className="hover:text-[var(--brand-ink)]" data-testid="footer-link-github">GitHub</a>
         </div>
       </div>
     </footer>

@@ -2,70 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Brand fonts */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Inter:wght@400;500;700&display=swap');
+/* Premium fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root{
-  --brand-primary: #1E4F8C; /* deep elegant blue */
-  --brand-secondary: #4D9DE0; /* soft blue */
-  --brand-bg: #F5F7FB; /* very light */
-  --brand-accent: #FFB347; /* warm accent */
+  /* Old-money luxury palette */
+  --brand-bg: #0B1220;          /* deep navy */
+  --brand-bg-2: #0F1A2F;        /* midnight blue */
+  --brand-card: #111827;        /* slightly lighter navy */
+  --brand-border: #1F2937;      /* subtle borders */
+  --brand-royal: #1D4ED8;       /* muted royal blue */
+  --brand-gold: #C6A667;        /* antique gold */
+  --brand-champagne: #E8DCC2;   /* soft champagne */
+  --brand-ink: #F3F4F6;         /* off-white text */
+  --brand-soft: #A5ADC1;        /* soft gray */
 }
-
-body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
-    --primary: 215 33% 33%;
+    --background: 221 61% 8%;
+    --foreground: 210 40% 98%;
+    --card: 221 40% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 221 40% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 224 72% 44%; /* royal */
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
+    --secondary: 222 44% 12%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 222 44% 14%;
+    --muted-foreground: 220 11% 70%;
+    --accent: 42 41% 60%; /* champagne/gold */
+    --accent-foreground: 221 61% 8%;
+    --destructive: 0 70% 45%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 215 33% 33%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 217 33% 19%;
+    --input: 217 33% 19%;
+    --ring: 224 72% 44%;
     --radius: 0.75rem;
   }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+
+  body { @apply text-[var(--brand-ink)] bg-[var(--brand-bg)] antialiased; }
+  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; letter-spacing: -0.01em; }
+  p, span, a, li, small, label, input, textarea, button { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
 }
 
-@layer base {
-  * { @apply border-border; }
-  body { @apply bg-background text-foreground; background-color: var(--brand-bg); }
+/********************
+  Premium Utilities
+*********************/
+@layer components {
+  .lux-container { @apply max-w-6xl mx-auto px-6; }
+  .lux-card {
+    @apply bg-[var(--brand-card)]/80 backdrop-blur border border-[var(--brand-border)] rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] transition-[transform,box-shadow] duration-300 ease-out;
+  }
+  .lux-card-hover:hover { @apply -translate-y-0.5 shadow-[0_10px_30px_-10px_rgba(12,22,38,0.8)]; box-shadow: 0 12px 30px -12px rgba(29,78,216,0.25); }
+  .lux-gold-sep { background: linear-gradient(90deg, rgba(198,166,103,0.25), rgba(198,166,103,0.65), rgba(198,166,103,0.25)); height:1px; }
+  .lux-btn-primary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-[var(--brand-ink)] bg-[var(--brand-royal)] relative;
+    box-shadow: inset 0 0 0 1px rgba(198,166,103,0.35);
+  }
+  .lux-btn-primary:hover { filter: brightness(1.05); }
+  .lux-btn-outline {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-[var(--brand-ink)] border;
+    border-color: rgba(198,166,103,0.6);
+  }
+  .lux-btn-outline:hover { box-shadow: 0 0 0 3px rgba(198,166,103,0.15) inset; }
+  .lux-input { @apply bg-transparent border rounded-xl px-3 py-2.5 text-[var(--brand-ink)] placeholder:text-[var(--brand-soft)] focus:outline-none; border-color: rgba(198,166,103,0.35); }
+  .lux-input:focus { box-shadow: 0 0 0 3px rgba(29,78,216,0.2); border-color: rgba(198,166,103,0.6); }
 }
+
+/********************
+  Animations
+*********************/
+@keyframes fadeUp { from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform: translateY(0);} }
+.fade-up { animation: fadeUp 800ms ease-out both; }
+
+@keyframes slowGlow { 0%{ box-shadow: 0 0 0 rgba(198,166,103,0);} 100%{ box-shadow: 0 10px 40px -10px rgba(29,78,216,0.25);} }
+.glow-on-hover:hover { animation: slowGlow 600ms ease-out forwards; }
+
+/* Hero visual */
+.hero-bg {
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(29,78,216,0.25), transparent 60%),
+              radial-gradient(1000px 500px at 85% 30%, rgba(198,166,103,0.15), transparent 60%),
+              linear-gradient(180deg, rgba(11,18,32,1), rgba(15,26,47,1));
+}
+.vignette:after { content:""; position:absolute; inset:0; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%); pointer-events:none; }
+
+/* Buttons specific transitions without affecting transforms */
+button, a { transition-property: background-color, color, box-shadow, border-color; transition-duration: 200ms; }

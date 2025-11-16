@@ -19,15 +19,21 @@ export default function Home(){
   return (
     <main>
       <Hero />
-      <section className="max-w-6xl mx-auto px-4 py-12" aria-labelledby="home-services-heading">
-        <h2 id="home-services-heading" className="text-lg font-semibold tracking-tight">Services</h2>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="lux-container py-16">
+        <div className="flex items-end justify-between">
+          <h2 className="text-xl font-semibold tracking-tight" style={{fontFamily:'Playfair Display, serif'}}>Services</h2>
+        </div>
+        <div className="mt-6 lux-gold-sep" />
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map(s=> <ServiceCard key={s.id} service={s} />)}
         </div>
       </section>
-      <section className="max-w-6xl mx-auto px-4 py-12 border-t" aria-labelledby="home-projects-heading">
-        <h2 id="home-projects-heading" className="text-lg font-semibold tracking-tight">Featured Projects</h2>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="lux-container py-16">
+        <div className="flex items-end justify-between">
+          <h2 className="text-xl font-semibold tracking-tight" style={{fontFamily:'Playfair Display, serif'}}>Featured Projects</h2>
+        </div>
+        <div className="mt-6 lux-gold-sep" />
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map(p=> <ProjectCard key={p.id} project={p} />)}
         </div>
       </section>
